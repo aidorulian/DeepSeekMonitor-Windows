@@ -21,14 +21,18 @@
 
 ## 截图
 
-*（待补充 — 运行 `npm start` 后截图托盘面板和详情窗口）*
+### 主面板
+![主面板](assets/1.png)
+
+### 模型详情
+![模型详情](assets/2.png)
 
 ## 安装
 
 ### 从源码运行
 
 ```bash
-git clone https://github.com/<your-username>/DeepSeekMonitor-Windows.git
+git clone https://github.com/aidorulian/DeepSeekMonitor-Windows.git
 cd DeepSeekMonitor-Windows
 npm install
 npm start
