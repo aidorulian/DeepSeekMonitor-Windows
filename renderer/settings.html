@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSeek Monitor 设置</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="settings-body" data-theme="dark">
+  <div class="settings-panel">
+    <div class="settings-header drag-region">
+      <span class="settings-title">设置</span>
+      <button class="settings-close no-drag" onclick="window.close()">×</button>
+    </div>
+    <div class="settings-scroll">
+    <div class="settings-container">
+
+    <!-- API Key -->
+    <div class="settings-section">
+      <div class="settings-section-title">API 配置</div>
+      <div class="form-group">
+        <label class="form-label" for="apiKey">DeepSeek API Key</label>
+        <div class="input-group">
+          <input type="password" id="apiKey" class="form-input" placeholder="sk-xxxxxxxxxxxxxxxx"
+                 autocomplete="off">
+          <button id="btnVerify" class="btn-primary btn-sm">验证并保存</button>
+        </div>
+        <div id="apiKeyStatus" class="status-message hidden"></div>
+      </div>
+    </div>
+
+    <!-- 刷新设置 -->
+    <div class="settings-section">
+      <div class="settings-section-title">刷新设置</div>
+      <div class="form-group">
+        <label class="form-label" for="refreshInterval">自动刷新间隔</label>
+        <select id="refreshInterval" class="form-select">
+          <option value="30">30 秒</option>
+          <option value="60" selected>60 秒（推荐）</option>
+          <option value="120">120 秒</option>
+          <option value="300">5 分钟</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="panelResidence">面板驻留时间</label>
+        <select id="panelResidence" class="form-select">
+          <option value="10" selected>10 秒</option>
+          <option value="20">20 秒</option>
+          <option value="30">30 秒</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 用量导入 -->
+    <div class="settings-section">
+      <div class="settings-section-title">用量导入</div>
+      <div class="form-group">
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;">
+          从 DeepSeek 平台 Usage 页面导出 CSV/ZIP 文件后手动导入。
+        </p>
+        <button id="btnImportCSV" class="btn-secondary">选择 CSV / ZIP 文件导入</button>
+        <div id="importStatus" class="status-message hidden"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="autoImportFolder">自动导入目录</label>
+        <div class="input-group">
+          <input type="text" id="autoImportFolder" class="form-input" placeholder="留空则不自动导入，如 D:\Downloads">
+          <button id="btnBrowseFolder" class="btn-secondary btn-sm">浏览</button>
+        </div>
+        <p style="font-size:11px;color:var(--text-tertiary);margin-top:4px;">
+          设置后将自动监测该目录中的新 CSV/ZIP 文件并导入，启动时也会扫描一次。
+        </p>
+      </div>
+    </div>
+
+    <!-- 自动导出 -->
+    <div class="settings-section">
+      <div class="settings-section-title">自动网页导出</div>
+      <div class="form-group">
+        <label class="form-label">
+          <input type="checkbox" id="autoExportEnabled" style="margin-right:6px;">
+          启用自动从 DeepSeek 官网导出数据
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="autoExportInterval">导出频率</label>
+        <select id="autoExportInterval" class="form-select">
+          <option value="60">每 1 分钟</option>
+          <option value="300" selected>每 5 分钟</option>
+          <option value="600">每 10 分钟</option>
+          <option value="1800">每 30 分钟</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button id="btnOpenLogin" class="btn-secondary">打开登录页面</button>
+        <span id="exportStatus" style="font-size:11px;color:var(--text-tertiary);margin-left:8px;"></span>
+      </div>
+    </div>
+
+    <!-- 外观 -->
+    <div class="settings-section">
+      <div class="settings-section-title">外观</div>
+      <div class="form-group">
+        <label class="form-label" for="themeSelect">主题</label>
+        <select id="themeSelect" class="form-select">
+          <option value="dark">深色模式</option>
+          <option value="light">浅色模式</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="chartType">趋势图类型</label>
+        <select id="chartType" class="form-select">
+          <option value="bar">柱状图</option>
+          <option value="line">折线图</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="chartMode">趋势图数据</label>
+        <select id="chartMode" class="form-select">
+          <option value="tokens">Token 消耗</option>
+          <option value="cost">费用 (¥)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="apiFilter">API 筛选</label>
+        <select id="apiFilter" class="form-select">
+          <option value="__all__">全部 API</option>
+          <option value="__split__">分API展示</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">窗口透明度: <span id="opacityValue">92%</span></label>
+        <input type="range" id="opacitySlider" min="50" max="100" value="92" class="opacity-slider">
+      </div>
+    </div>
+
+    <!-- 缓存管理 -->
+    <div class="settings-section">
+      <div class="settings-section-title">缓存管理</div>
+      <div class="form-group">
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;">
+          清除本地缓存的余额和用量数据。下次启动需重新获取。
+        </p>
+        <button id="btnClearCache" class="btn-danger">清除缓存数据</button>
+        <div id="cacheStatus" class="status-message hidden"></div>
+      </div>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div class="settings-actions">
+      <button id="btnClose" class="btn-secondary">关闭</button>
+    </div>
+  </div>
+
+    </div>
+    </div>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>

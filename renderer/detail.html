@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模型详情</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="detail-body" data-theme="dark">
+  <div class="detail-panel">
+    <div class="detail-header">
+      <span id="detailModelName" class="detail-model-name">V4 Flash 详情</span>
+      <button class="detail-close" onclick="closeDetail()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="detail-scroll">
+
+    <!-- 统计 -->
+    <div class="detail-stats">
+      <div class="stat-item">
+        <div class="stat-label">总 Token</div>
+        <div id="statTotalTokens" class="stat-value">0</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">总费用</div>
+        <div id="statTotalCost" class="stat-value">¥0.00</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">缓存命中率</div>
+        <div id="statPromptTokens" class="stat-value">0%</div>
+        <div id="statCacheInfo" class="stat-sub"></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">请求次数</div>
+        <div id="statCompletionTokens" class="stat-value">0</div>
+        <div id="statRequestCount" class="stat-sub"></div>
+      </div>
+    </div>
+
+    <!-- 每日 Token 消耗 -->
+    <div class="detail-chart-section">
+      <div class="detail-chart-title">每日 Token 消耗</div>
+      <div class="detail-chart-container"><canvas id="chartTokens"></canvas></div>
+    </div>
+
+    <!-- 每日费用 -->
+    <div class="detail-chart-section">
+      <div class="detail-chart-title">每日费用 (¥)</div>
+      <div class="detail-chart-container"><canvas id="chartCost"></canvas></div>
+    </div>
+
+    <!-- 每日请求次数 -->
+    <div class="detail-chart-section">
+      <div class="detail-chart-title">每日 API 请求次数</div>
+      <div class="detail-chart-container"><canvas id="chartRequests"></canvas></div>
+    </div>
+
+    <!-- 每日缓存命中率 -->
+    <div class="detail-chart-section">
+      <div class="detail-chart-title">每日缓存命中率</div>
+      <div class="detail-chart-container"><canvas id="chartCache"></canvas></div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+  <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
+  <script src="detail.js"></script>
+</body>
+</html>

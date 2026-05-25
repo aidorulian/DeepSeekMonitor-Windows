@@ -1,0 +1,62 @@
+{
+  "name": "deepseek-monitor-windows",
+  "version": "1.0.0",
+  "description": "Windows 系统托盘工具 — 实时监控 DeepSeek V4 Flash / Pro Token 消耗和消费",
+  "author": "DeepSeek Monitor Contributors",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "prebuild": "node scripts/make-icon.js",
+    "build": "electron-builder --win",
+    "build:dir": "electron-builder --win --dir"
+  },
+  "build": {
+    "appId": "com.deepseek.monitor-win",
+    "productName": "DeepSeek Monitor",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "tubiao.ico",
+      "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "assets/",
+        "to": "assets/"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "tubiao.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DeepSeek Monitor"
+    }
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "chokidar": "^3.6.0",
+    "electron-store": "^8.2.0",
+    "unzipper": "^0.12.0"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  }
+}
