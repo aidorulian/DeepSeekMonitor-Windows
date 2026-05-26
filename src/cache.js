@@ -13,7 +13,6 @@ function getCacheStore() {
         apiKey: '',
         refreshInterval: 60,
         panelResidenceSeconds: 10,
-        cachedDashboard: null,
         cachedUsageRecords: [],
         importedFileHashes: []
       }
