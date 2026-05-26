@@ -6,7 +6,6 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "prebuild": "node scripts/make-icon.js",
     "build": "electron-builder --win",
     "build:dir": "electron-builder --win --dir"
   },
