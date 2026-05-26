@@ -86,3 +86,7 @@ DeepSeek Usage 页面导出 ZIP 包含两个文件：
 ## 📄 许可证
 
 MIT — 与 [原版](https://github.com/JayHome137/DeepSeekMonitor/blob/main/LICENSE) 保持一致
+
+---
+
+> 🛠 本项目由 [Reasonix](https://reasonix.ai) AI 编程助手辅助开发

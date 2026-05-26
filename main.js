@@ -107,22 +107,12 @@ app.on('before-quit', () => {
 
 // ── 系统托盘 ──────────────────────────────────────────────
 function createTray() {
-  // 尝试多个图标路径
-  const iconPaths = [
-    path.join(__dirname, 'assets', 'deepseek-icon.png'),
-    path.join(__dirname, 'tubiao.ico'),
-    path.join(__dirname, 'assets', 'icon.png'),
-  ];
-  let icon = null;
-  for (const p of iconPaths) {
-    try {
-      if (fs.existsSync(p)) {
-        icon = nativeImage.createFromPath(p);
-        if (!icon.isEmpty()) break;
-      }
-    } catch { /* try next */ }
-  }
-  if (!icon || icon.isEmpty()) {
+  const iconPath = path.join(__dirname, 'assets', 'deepseek-icon.png');
+  let icon;
+  try {
+    icon = nativeImage.createFromPath(iconPath);
+    if (icon.isEmpty()) throw new Error('empty');
+  } catch {
     icon = createFallbackIcon();
   }
   const resized = icon.resize({ width: 16, height: 16 });
@@ -204,6 +194,10 @@ function createMainWindow() {
   });
 
   mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
+
+  // 任务栏图标
+  const appIcon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'deepseek-icon.png'));
+  if (!appIcon.isEmpty()) mainWindow.setIcon(appIcon);
 
   // 应用保存的透明度
   const savedOpacity = store.get('opacity', 0.92);
@@ -324,6 +318,9 @@ function openSettings() {
   });
 
   settingsWindow.loadFile(path.join(__dirname, 'renderer', 'settings.html'));
+
+  const appIcon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'deepseek-icon.png'));
+  if (!appIcon.isEmpty()) settingsWindow.setIcon(appIcon);
 
   settingsWindow.on('closed', () => {
     settingsWindow = null;
