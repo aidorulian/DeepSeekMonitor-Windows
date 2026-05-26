@@ -81,6 +81,8 @@ function setupMenu() {
 
 // ── App 启动 ──────────────────────────────────────────────
 app.whenReady().then(async () => {
+  // Windows 任务栏图标 ID
+  app.setAppUserModelId('com.deepseek.monitor-win');
   setupMenu();
   createTray();
   scheduleAutoRefresh();
@@ -190,14 +192,11 @@ function createMainWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
-    }
+    },
+    icon: path.join(__dirname, 'assets', 'deepseek-icon.png')
   });
 
   mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
-
-  // 任务栏图标
-  const appIcon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'deepseek-icon.png'));
-  if (!appIcon.isEmpty()) mainWindow.setIcon(appIcon);
 
   // 应用保存的透明度
   const savedOpacity = store.get('opacity', 0.92);
@@ -317,10 +316,10 @@ function openSettings() {
     }
   });
 
-  settingsWindow.loadFile(path.join(__dirname, 'renderer', 'settings.html'));
-
   const appIcon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'deepseek-icon.png'));
   if (!appIcon.isEmpty()) settingsWindow.setIcon(appIcon);
+
+  settingsWindow.loadFile(path.join(__dirname, 'renderer', 'settings.html'));
 
   settingsWindow.on('closed', () => {
     settingsWindow = null;
