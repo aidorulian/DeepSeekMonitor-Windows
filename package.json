@@ -1,6 +1,6 @@
 {
   "name": "deepseek-monitor-windows",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Windows 系统托盘工具 — 实时监控 DeepSeek V4 Flash / Pro Token 消耗和消费",
   "author": "DeepSeek Monitor Contributors",
   "main": "main.js",
